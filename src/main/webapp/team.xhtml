@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Criador de Times</title>
+    </head>
+    <body>
+        <h1>Criador de Times</h1>
+        <br/>
+        <h:form>
+            <h:panelGrid columns="2">
+                <h:outputLabel value="Nome do time: " for="name-input-box"/>
+                <p:inputText id="name-input-box" value="#{teamBean.team.name}" disabled="#{teamBean.newButtonActivated()}"/>
+                
+                <h:outputLabel value="Cidade do time: " for="city-input-box"/>
+                <p:inputText id="city-input-box" value="#{teamBean.team.city}" disabled="#{teamBean.newButtonActivated()}"/>
+            </h:panelGrid>
+            
+            <h:panelGrid columns="3">
+                <p:commandButton id="new-button" value="Novo" action="#{teamBean.newOperation()}" disabled="#{!teamBean.newButtonActivated()}" process="@form" update="@form"/>
+                <p:commandButton id="save-button" value="Salvar" action="#{teamBean.saveOperation()}" disabled="#{teamBean.newButtonActivated()}" process="@form" update="@form"/>
+                <p:commandButton id="cancel-button" value="Cancelar" action="#{teamBean.cancelOperation()}" disabled="#{teamBean.newButtonActivated()}" process="@form" update="@form"/>
+            </h:panelGrid>
+            
+            <p:dataTable rendered="#{not empty teamBean.getTeamList()}" value="#{teamBean.getTeamList()}" var="team" styleClass="tabela">
+                <f:facet name="header">Lista de times</f:facet>
+                
+                <p:column>
+                    <f:facet name="header">Nome</f:facet>
+                        #{team.name}
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Cidade</f:facet>
+                        #{team.city}
+                </p:column>
+                <p:column>
+                    <p:commandButton id="remove-button" value="Remover" action="#{teamBean.removeOperation(team)}" process="@form" update="@form"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton id="edit-button" value="Editar" action="#{teamBean.loadTeam(team)}" process="@form" update="@form"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </body>
+</html>
