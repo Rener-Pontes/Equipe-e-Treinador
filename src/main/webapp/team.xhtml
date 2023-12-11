@@ -5,49 +5,65 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>Criador de Times</title>
-    </head>
-    <body>
-		<ui:composition template="_template.xhtml">
-			<ui:define name="title">Criador de Times</ui:define>
+    <ui:composition template="_template.xhtml">
+        <ui:define name="title">
+            Cadastrar Time
+        </ui:define>
+        
+        <ui:define name="content">
+            <h:form>
+                <h:panelGrid columns ="2">
+                    <h:outputLabel value="Nome: " for ="name-input-field"/>
+                    <p:inputText disabled="#{teamBean.newButtonActivated()}" value ="#{teamBean.team.name}" id="name-input-field"  styleClass="edit"/>
 
-			<ui:define name="content">
-				<h:form>
-					<h:panelGrid columns="2">
-						<h:outputLabel value="Nome do time: " for="name-input-box"/>
-						<p:inputText id="name-input-box" value="#{teamBean.team.name}" disabled="#{teamBean.newButtonActivated()}"/>
+                    <h:outputLabel value="Cidade: " for ="city-input-field"/>
+                    <p:inputText disabled="#{teamBean.newButtonActivated()}" value ="#{teamBean.team.city}" id="city-input-field"  styleClass="edit"/>
+                    
+                    <h:outputLabel value="Treinador: " for="trainer-input-option"/>
+                    <p:selectOneMenu id="trainer-input-option" disabled="#{teamBean.newButtonActivated()}" value="#{teamBean.team.trainer}">
+                        <f:selectItem itemLabel="Selecionar curso" itemValue=""/>
+                        <f:selectItems value="#{trainerBean.trainers}" var="trainer" itemLabel="#{trainer.name}" itemValue="#{trainer}"/>
+                    </p:selectOneMenu>
 
-						<h:outputLabel value="Cidade do time: " for="city-input-box"/>
-						<p:inputText id="city-input-box" value="#{teamBean.team.city}" disabled="#{teamBean.newButtonActivated()}"/>
-					</h:panelGrid>
+                </h:panelGrid >
+                <h:panelGrid columns ="3">
 
-					<h:panelGrid columns="3">
-						<p:commandButton id="new-button" value="Novo" action="#{teamBean.newOperation()}" disabled="#{!teamBean.newButtonActivated()}" process="@form" update="@form"/>
-						<p:commandButton id="save-button" value="Salvar" action="#{teamBean.saveOperation()}" disabled="#{teamBean.newButtonActivated()}" process="@form" update="@form"/>
-						<p:commandButton id="cancel-button" value="Cancelar" action="#{teamBean.cancelOperation()}" disabled="#{teamBean.newButtonActivated()}" process="@form" update="@form"/>
-					</h:panelGrid>
+                    <p:commandButton id="new-button" disabled="#{!teamBean.newButtonActivated()}" value ="Novo" action="#{teamBean.newOperation()}" process="@form" update="@form"/>
+                    <p:commandButton id="save-button" disabled="#{teamBean.newButtonActivated()}" value ="Salvar" action ="#{teamBean.saveOperation()}" process="@form" update="@form"/>
+                    <p:commandButton id="cancel-button" disabled="#{teamBean.newButtonActivated()}" value ="Cancelar" action ="#{teamBean.cancelOperation()}" process="@form" update="@form"/>
+                </h:panelGrid >
 
-					<p:dataTable rendered="#{not empty teamBean.getTeamList()}" value="#{teamBean.getTeamList()}" var="team" styleClass="tabela">
-						<f:facet name="header">Lista de times</f:facet>
 
-						<p:column>
-							<f:facet name="header">Nome</f:facet>
-								#{team.name}
-						</p:column>
-						<p:column>
-							<f:facet name="header">Cidade</f:facet>
-								#{team.city}
-						</p:column>
-						<p:column>
-							<p:commandButton id="remove-button" value="Remover" action="#{teamBean.removeOperation(team)}" process="@form" update="@form"/>
-						</p:column>
-						<p:column>
-							<p:commandButton id="edit-button" value="Editar" action="#{teamBean.loadTeam(team)}" process="@form" update="@form"/>
-						</p:column>
-					</p:dataTable>
-				</h:form>
-			</ui:define>        
-		</ui:composition>
-    </body>
+                <p:dataTable value="#{teamBean.teamList}" var="team" rendered="#{not empty teamBean.teamList}">
+
+                    <f:facet name="header">Lista de Professores </f:facet>
+
+                    <p:column>
+                        <f:facet name="header">Nome</f:facet>
+                        #{team.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Cidade</f:facet>
+                        #{team.city}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Treinador</f:facet>
+                        #{team.trainer.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Remover </f:facet>
+                        <p:commandButton value="Remover" action ="#{teamBean.removeOperation(team)}" process="@form" update="@form"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Alterar</f:facet>
+                        <p:commandButton value="Alterar" action ="#{teamBean.loadTeam(team)}" process="@form" update="@form"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
 </html>
+
