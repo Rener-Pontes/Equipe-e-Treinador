@@ -62,7 +62,7 @@ public class TeamBean implements Serializable {
     public void saveOperation() {
         if (currentState == ApplicationStates.EDITING) 
             repository.saveTeam(index, team);
-        else {
+        else if (currentState == ApplicationStates.CREATING) {
             repository.addTeam(team);
         }
         

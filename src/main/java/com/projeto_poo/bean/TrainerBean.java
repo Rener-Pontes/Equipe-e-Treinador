@@ -23,8 +23,8 @@ import java.util.List;
 @Named("trainerBean")
 @SessionScoped
 public class TrainerBean implements Serializable {
-    private List<Trainer> trainers = new ArrayList<>();
-    private Trainer trainer = new Trainer();
+    List<Trainer> trainers = new ArrayList<>();
+    Trainer trainer = new Trainer();
     ApplicationStates currentState = ApplicationStates.IDLE;
     int indexChange = -1;
     
@@ -115,9 +115,9 @@ public class TrainerBean implements Serializable {
                 return null;
             }
             
-            TrainerBean controler = (TrainerBean) facesContext.getApplication().getELResolver()
+            TrainerBean controller = (TrainerBean) facesContext.getApplication().getELResolver()
                     .getValue(facesContext.getELContext(), null, "trainerBean");
-            return controler.getTrainer();
+            return controller.getTrainer(value);
         }
         
         @Override
