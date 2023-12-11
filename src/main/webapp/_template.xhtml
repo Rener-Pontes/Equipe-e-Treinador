@@ -5,26 +5,25 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <head/>
-    <body>
+    <h:head/>
+    <h:body>
         <div id="header">
-			<p:growl id="messages" showDetail="true" autoUpdate="true"/>
-			
-			<h:form>
-				<p:menuButton value="Páginas">
-					<p:menuitem value="Criar time" action="team?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o"/>
-					<p:menuitem value="Criar treinador" action="trainer?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o"/>
-				</p:menuButton>
-			</h:form>
-			
-			<h1>
-				<ui:insert name="title"/>
-			</h1>
-			<br/>
-		</div>
-		
-		<div id="content">
-			<ui:insert name="content"/>
-		</div>
-    </body>
+            <p:growl id="messages" showDetail="true" autoUpdate="true"/>
+
+            <h:form>
+                <p:menuButton value="Páginas">
+                    <p:menuitem value="Cadastrar time" action="team?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o"/>
+                    <p:menuitem value="Cadastrar treinador" action="trainer?faces-redirect=true" icon="fa fa-fw fa-pencil-square-o"/>
+                </p:menuButton>
+            </h:form>
+
+            <h1>
+                <ui:insert name="title"/>
+            </h1>
+        </div>
+
+        <div id="content">
+            <ui:insert name="content"/>
+        </div>
+    </h:body>
 </html>

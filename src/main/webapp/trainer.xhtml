@@ -3,8 +3,12 @@
       xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
     
-    <ui:composition template="template.xhtml">
-        <ui:define name="title">Cadastrar Trainador</ui:define>
+    <h:head>
+        <title>Treinador</title>
+    </h:head>
+    
+    <ui:composition template="_template.xhtml">
+        <ui:define name="title">Cadastrar Treinador</ui:define>
         
         <ui:define name="content">
             <h:form id="trainers">
@@ -38,11 +42,11 @@
                     
                     <p:column>
                         <f:facet name="header">Remover</f:facet>
-                        <p:commandButton value="Remove" action="#{trainerBean.removeTrainer(trainer)}" process="@form" update="@form" styleClass="button" class="button"/>
+                        <p:commandButton value="Remover" action="#{trainerBean.removeTrainer(trainer)}" process="@form" update="@form" styleClass="button" class="button"/>
                     </p:column>
                     <p:column>
                         <f:facet name="header">Alterar</f:facet>
-                        <p:commandButton value="Alter" action="#{trainerBean.loadTrainer(trainer)}" process="@form" update="@form" styleClass="button"/>
+                        <p:commandButton value="Alterar" action="#{trainerBean.loadTrainer(trainer)}" process="@form" update="@form" styleClass="button"/>
                     </p:column>
                 </p:dataTable>
             </h:form>
