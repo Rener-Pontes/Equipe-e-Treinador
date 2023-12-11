@@ -10,7 +10,6 @@ package com.projeto_poo.model;
  */
 public class Person {
     private String name, cpf, date_birth;
-    private Address address = new Address();
     
     public Person() {}
 
@@ -32,30 +31,6 @@ public class Person {
         return date_birth;
     }
 
-    public String getAddressNumber() {
-        return address.getNumber();
-    }
-    
-    public String getAddressStreat() {
-        return address.getStreet();
-    }
-    
-    public String getAddressNeighborhood() {
-        return address.getNeighborhood();
-    }
-    
-    public String getAddressCity() {
-        return address.getCity();
-    }
-    
-    public String getAddressState() {
-        return address.getState();
-    }
-    
-    public String getAddressFull() {
-        return address.getAddressFull();
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -66,21 +41,5 @@ public class Person {
 
     public void setDateBirth(String date_birth) {
         this.date_birth = date_birth;
-    }
-
-    public void setAddress(String street, String number, String neighborhood) {
-        address.setStreet(street);
-        address.setNumber(number);
-        address.setNeighborhood(neighborhood);
-        address.setCity("");
-        address.setState("");
-    }
-    
-    public void setAddressFull(String street, String number, String neighborhood, String city, String state) {
-        address.setStreet(street);
-        address.setNumber(number);
-        address.setNeighborhood(neighborhood);
-        address.setCity(city);
-        address.setState(state);
     }
 }

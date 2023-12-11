@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    
+    <ui:composition template="template.xhtml">
+        <ui:define name="title">Cadastrar Trainador</ui:define>
+        
+        <ui:define name="content">
+            <h:form id="trainers">
+                <h:panelGrid columns="2" id="painel">
+                    <h:outputLabel value="Name: " for="name-field"/>
+                    <p:inputText value="#{trainerBean.trainer.name}" disabled="#{trainerBean.isNewTrainer()}" id="name-field" styleClass="edit"/>
+                    <h:outputLabel value="CPF: " for="cpf-field"/>
+                    <p:inputText value="#{trainerBean.trainer.cpf}" disabled="#{trainerBean.isNewTrainer()}" id="cpf-field" styleClass="edit"/>
+                    <h:outputLabel value="Data de nascimento: " for="date-birth-field"/>
+                    <p:inputText value="#{trainerBean.trainer.dateBirth}" disabled="#{trainerBean.isNewTrainer()}" id="date-birth-field" styleClass="edit"/>
+                </h:panelGrid>
+                
+                <h:panelGrid columns="3">
+                    <p:commandButton id="new-button" disabled="#{!trainerBean.isNewTrainer()}" value="Novo" action="#{trainerBean.newTrainer()}" process="@form" update="@form" styleClass="button" validateClient="true"/>
+                    <p:commandButton id="save-button" disabled="#{trainerBean.isNewTrainer()}" value="Salvar" action="#{trainerBean.addTrainer()}" process="@form" update="@form" styleClass="button" validateClient="true"/>
+                    <p:commandButton id="cancel-button" disabled="#{trainerBean.isNewTrainer()}" value="Cancelar" action="#{trainerBean.cancel()}" process="@form" update="@form" styleClass="button"/>
+                </h:panelGrid>
+                
+                <p:dataTable value="#{trainerBean.getTrainers()}" var="trainer" rendered="#{not empty trainerBean.getTrainers()}" styleClass="table">
+                    <f:facet name="header">Lista de trainadores</f:facet>
+                    <p:column>
+                        <f:facet name="header">Nome</f:facet> #{trainer.name}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">CPF</f:facet> #{trainer.cpf}
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Data Nascimento</f:facet>
+                        #{trainer.dateBirth}
+                    </p:column>
+                    
+                    <p:column>
+                        <f:facet name="header">Remover</f:facet>
+                        <p:commandButton value="Remove" action="#{trainerBean.removeTrainer(trainer)}" process="@form" update="@form" styleClass="button" class="button"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">Alterar</f:facet>
+                        <p:commandButton value="Alter" action="#{trainerBean.loadTrainer(trainer)}" process="@form" update="@form" styleClass="button"/>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
